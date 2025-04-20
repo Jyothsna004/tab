@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Interior Designer Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    #hero {
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: background-image 1s ease-in-out;
+      padding: 80px 20px 20px;
+      box-sizing: border-box;
+    }
+
+    .animated-text span {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(-40px);
+      animation: dropLetter 0.5s ease-out forwards;
+      margin-right: 1px;
+      white-space: pre;
+    }
+
+    .animated-text span:nth-child(n) {
+      animation-delay: calc(0.05s * var(--i));
+    }
+
+    @keyframes dropLetter {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    #hero h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 4rem;
+      color: #0f0d0d;
+      margin-bottom: 1.5rem;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+    }
+
+    button {
+      background-color: #aaaaad;
+      color: rgb(255, 255, 255);
+      border: none;
+      padding: 0.8rem 2rem;
+      font-size: 1.2rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      margin-top: 20px;
+      box-shadow: none;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #5a39ff;
+    }
+  </style>
+</head>
+
+<body>
+
+<section id="hero">
+  <h1 class="animated-text" id="title-text">
+    
+    <span style="--i:0;">T</span><span style="--i:1;">r</span><span style="--i:2;">a</span><span style="--i:3;">n</span><span style="--i:4;">s</span><span style="--i:5;">f</span><span style="--i:6;">o</span><span style="--i:7;">r</span><span style="--i:8;">m</span><span style="--i:9;">&nbsp;</span><span style="--i:10;">Y</span><span style="--i:11;">o</span><span style="--i:12;">u</span><span style="--i:13;">r</span><span style="--i:14;">&nbsp;</span><span style="--i:15;">R</span><span style="--i:16;">o</span><span style="--i:17;">o</span><span style="--i:18;">m</span><span style="--i:19;">&nbsp;</span><span style="--i:20;">w</span><span style="--i:21;">i</span><span style="--i:22;">t</span><span style="--i:23;">h</span><span style="--i:24;">&nbsp;</span><span style="--i:25;">A</span><span style="--i:26;">I</span>
+  </h1>
+
+  <button onclick="startDesigning()">Start Designing</button>
+</section>
+
+<script>
+  function startDesigning() {
+    alert('Start Designing clicked! (Later link this to Detect Furniture tab)');
+    // Later you can link this to your Gradio tab switch
+  }
+
+  function animateText(id) {
+    const el = document.getElementById(id);
+    const text = Array.from(el.childNodes).map(span => span.textContent).join('');
+    el.innerHTML = '';
+    [...text].forEach((char, i) => {
+      const span = document.createElement('span');
+      span.textContent = char === ' ' ? '\u00A0' : char;
+      span.style.setProperty('--i', i);
+      el.appendChild(span);
+    });
+  }
+
+  animateText('title-text');
+
+  const hero = document.getElementById('hero');
+  const bgImages = [
+    "https://rumahmebel.id/wp-content/uploads/2023/02/Desain-Interior-Kontemporer.jpg",
+    "https://thedesigneur.com/wp-content/uploads/2023/09/Interior-Designer-Career-Path-1024x1024.png",
+    "https://www.qcdesignschool.com/blog/wp-content/uploads/2022/08/Interior-designer-without-degree-Header-Image.jpg",
+    "https://rumahmebel.id/wp-content/uploads/2023/02/Desain-Interior-Kontemporer.jpg"
+  ];
+  let current = 0;
+
+  function changeHeroBackground() {
+    hero.style.backgroundImage = `url('${bgImages[current]}')`;
+    current = (current + 1) % bgImages.length;
+  }
+
+  changeHeroBackground();
+  setInterval(changeHeroBackground, 2000); // Change every 2 seconds
+</script>
+
+</body>
+</html>
